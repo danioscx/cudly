@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %} Register - oscop Community {% endblock %}
+{% block body %}
+<header class="header">
+    <div class="nav">
+        <div class="netral">
+            <a href="/login">
+                <button class="butt">Login</button>
+            </a>
+            <a href="/" class="brand">
+                <img src="/assets/media/oscop.png" width="100px" height="40px" />
+            </a>
+            
+        </div>
+    </div>
+</header>
+<div class="form-login">
+    <h4 class="title">Register Oscop Community</h4>
+    {%with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashed">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% from "_formhelpers.html" import render_field %}
+    <form class="form-data" action="/register" method="POST">
+        {{ render_field(form.name, placeholder='name', autocomplete='off', class='form-control') }}
+        {{ render_field(form.email, placeholder='email', autocomplete='off', class='form-control') }}
+        {{ render_field(form.password, placeholder='password', class='form-control') }}
+        <div class="rignt">
+            <button class="butt">Register</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

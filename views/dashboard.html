@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %} {{name[0]}} Profile {% endblock %}
+{% block head %}
+{{super()}}
+<script src="/assets/js/jquery.min.js"></script>
+<script language="JavaScript">$(document).ready(function () {$("#menu").click(function () {$("#clear").show();$("#cov").show();});$("#cov").click(function () {$("#clear").hide();$("#cov").hide();});$("#yup").click(function () {$(".cover-click").show();$("#shop").show();});$("#shop").click(function () {$(".cover-click").hide();$("#shop").hide()});function UrlImg(input) {if (input.files && input.files[0]) {var reader = new FileReader();reader.onload = function (e) {$("#change").attr('src', e.target.result);}
+             reader.readAsDataURL(input.files[0]);}}$("#files").change(function () {UrlImg(this);});
+        $(".button").click(function () {
+            $.ajax({
+                url: "/uploader",
+                type: "POST",
+                data: new FormData(),
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (ev) {
+                    console.info('oke', ev);
+                },
+                error: function (ev) {
+                    console.info('error', ev);
+                }
+            }).done(
+                already()
+            );
+        });
+        function already() {
+            window.location.reload;
+        }
+    });
+</script>
+
+{% endblock %}
+{% block body %}
+<header class="header">
+    <div class="nav">
+        <div class="netral">
+            {% if session['email'] == '' %}
+                <a href="/login">
+                    <button class="button">Login</button>
+                </a>
+            {% else %}
+                <a href="javascript: void(0)" id="menu">
+                    <img src="{{profile[0]}}" class="say-hi" title="{{name[0]}}"/>
+                </a>
+            {% endif %}
+            <a href="/" class="brand">
+                <img src="/assets/media/oscop.png" width="100px" height="40px" />
+            </a>
+            <form>
+                <input class="input-main" type="text" autocomplete="off" placeholder="Search something .."
+                id="data">
+            </form>
+        </div>
+    </div>
+</header>
+<div class="menu-click" id="clear">
+<<<<<<< HEAD
+    <ul class="nav justify-content-center flex-column" style="text-align:center;">
+        <li class="nav-item">
+            <a href="/" class="nav-link">Inbox</a>
+        </li>
+        <li class="nav-item">
+            <a href="/" class="nav-link">Notification</a>
+        </li>
+        <li class="nav-item">
+            <a href="/" class="nav-link">Log Out</a>
+        </li>
+    </ul>
+=======
+
+>>>>>>> c505dc81b8da6db9bccd4cf9c53fe5fe83068551
+</div>
+<div class="cover" id="cov"></div>
+<div class="cover" id="shop"></div>
+<div class="cover-click">
+    <form enctype="multipart/form-data" action="/uploader" method="POST">
+        <div class="wrap-json">
+            <button class="button-json">Select File</button>
+            <input type="file" id="files" name="file"/>
+        </div>
+        <div class="indexOfImg">
+            <img src="/assets/media/thumbnail-dashboard.png" class="indexOfImg" id="change">
+        </div>
+        <div class="right">
+            <button class="butt">Upload</button>
+        </div>
+    </form>
+</div>
+<div id="dash-field">
+    <div class="list-user">
+
+    </div>
+    <div class="main-user">
+        <div>
+            {% if back is not none %}
+                <div class="back-img">
+                    <img src="{{back[0]}}" class="back-img"/>
+                    {% if session['name'] == name[0] %}
+                    <div class="up-cover" id="yup">
+                        <p>Change your cover photo</p>
+                    </div>
+                    {% else %}
+                        <div></div>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="back-none">
+                    {% if session['name'] == name %}
+                    <div class="up-cover" id="yup">
+                        <p>Upload your cover photo</p>
+                    </div>
+                    {% else %}
+                        <div></div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="profile-photo">
+            {% if profile is not none %}
+                <img src="{{profile[0]}}" class="profile-l"/>
+            {% else %}
+                <div class="profile-l"></div>
+            {% endif %}
+        </div>
+        <div class="name-user">
+            <h3 class="title-user">{{name[0]}}</h3>
+        </div>
+    </div>
+    <div class="post-user">{% if not art %} Your post will be here {% else %} {% for x in art %}
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <a href="/article/{{x[3]}}"><h5>{{x[0]}}</h5></a>
+                </div>
+                <div class="card-subtitle md-2 text-muted">
+                    {{x[2]}}
+                </div>
+                <div class="card-text">
+                    {{x[1][:100]}}
+                </div>
+            </div>
+        </div>{% endfor %} {% endif %}
+    </div>
+</div>
+{% endblock %}

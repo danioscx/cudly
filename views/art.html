@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %} {{title}} {% endblock %}
+{% block head %}
+{{super()}}
+<script src="/assets/js/jquery.min.js"></script>
+<script language="JavaScript">
+</script>
+{% endblock %}
+{% block body %}
+<header class="header">
+    <div class="nav">
+       <div class="netral">{% if session['email'] %}
+            <a href="/log_out">
+                <a href="/user/{{session['uid'].decode()}}">
+                    <img src="{{session['pro']}}" class="say-hi"/>
+                </a>
+            </a>{% else %}
+            <a href="/login">
+                <button class="butt">Login</button>
+            </a>{% endif %}
+            <a href="/" class="brand">
+                <img src="/assets/media/oscop.png" width="100px" height="40px" />
+            </a>
+            <form>
+                <input class="input-main" type="text" autocomplete="off"
+                placeholder="Search something .." id="data">
+            </form>
+       </div>
+    </div>
+</header>
+<div class="container-main">
+    <div class="home-main">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3>{{title}}</h3>
+                </div>
+                <div class="card-subtitle mb-2 text-muted">
+                    <p>{{date}}</p>
+                </div>
+                <div class="card-text">
+                    {{body}}
+                </div>
+            </div>
+        </div> <br> {% for z in comment_value %}
+        <div class="card" id="data-length">
+            <div class="card-body">
+                <div class="card-text">
+<<<<<<< HEAD
+                    <img class="comment-img" src="{{z[4]}}" title="{{z[3]}}"/><div class="comment-box"> {{z[2]}}</div>
+=======
+                    <img class="comment-img" src="{{z[4]}}" title="{{z[3]}}"/> &nbsp; &nbsp; {{z[2]}}
+>>>>>>> c505dc81b8da6db9bccd4cf9c53fe5fe83068551
+                </div>
+                <span class=" float-right"> by <a href="/user/{{z[0].decode()}}" class="card-link">{{z[3]}}</a> on {{z[1]}}</span>
+            </div>
+        </div> <br/>{% endfor %}
+        <form class="form-group" action="/article/{{link}}" method="post"> {% with messages = get_flashed_messages() %} {% if messages %}
+                <ul class="flashed">{% for message in messages %}
+                        <li>{{ message }}</li>{% endfor %}
+                </ul>{% endif %} {% endwith %}
+            <textarea name="content" class="form-control" placeholder="Add your comments"></textarea>
+            <button class="btn btn-info btn-sm float-right"
+            style="margin: 5px 0px;">Send</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %} Welcome in oscop comunities {% endblock %}{% block head %}{{super()}}
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/system.js"></script>
+<script src="/assets/js/net.js"></script>{% endblock %}{% block body %}
+<header class="header">
+    <div class="nav">
+       <div class="netral">{% if session['email'] %}
+            <a href="/log_out">
+                <a href="/user/{{session['uid'].decode()}}">
+                    <img src="{{session['pro']}}" class="say-hi"/>
+                </a>
+            </a>{% else %}
+            <a href="/login">
+                <button class="butt">Login</button>
+            </a>{% endif %}
+            <a href="/" class="brand">
+                <img src="/assets/media/oscop.png" width="100px" height="40px" />
+            </a>
+            <form>
+                <input class="input-main" type="text" autocomplete="off"
+                placeholder="Search something .." id="data">
+            </form>
+       </div>
+    </div>
+</header>
+<nav class="navi" id="nav">
+      <div class="center">
+            <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                <li class="nav-item small">
+                    <a class="nav-link active" data-toggle="tab" data-target="#disc" href="#pertanyaan" role="tab">
+                        Discussion
+                    </a>
+                </li>
+                <li class="nav-item small">
+                    <a class="nav-link" data-toggle="tab" data-target="#learn" href="#pertanyaan" role="tab">
+                        Images
+                    </a>
+                </li>
+                <li class="nav-item small">
+                    <a class="nav-link" data-toggle="tab" data-target="#about" href="#pertanyaan" role="tab">
+                        Documents
+                    </a>
+                </li>
+            </ul>
+      </div>
+</nav>
+<div class="container-main">
+    <div class="side-bar">
+
+    </div>
+    <div class="tab-content home-main">
+        <div class="tab-pane active show fade" id="disc" role="tabpanel"> {% if session['email'] %}
+            <a href="#" id="add">Add your post</a>
+            <form class="form-group x " method="POST" action="/add_post" id="x">
+                <input type="text" class="small form-control" placeholder="Title post" name="title"/> <br>
+                <textarea class="form-control" name="content" placeholder="Content post"></textarea> <br/>
+                <input type="text" class="form-control" name="tag" placeholder="Tag"> <br/>
+                <button type="submit" class="btn btn-secondary btn-sm">Send</button>
+            </form> {% else %}
+<<<<<<< HEAD
+            <p class="tab-add">You must login to add the post</p>{% endif %}
+=======
+            <p>You must login to add the post</p>{% endif %}
+>>>>>>> c505dc81b8da6db9bccd4cf9c53fe5fe83068551
+             {% for article in art %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <a href="/article/{{article['link_post']}}"><h5>{{article['title']}}</h5></a>
+                    </div>
+                    <div class="card-subtitle mb-2 text-muted">{{article['date']}}</div>
+                    <div class="card-text">
+                        <p>{{article['value'][:100]}}</p>
+                    </div>
+                </div>
+            </div> <br/>{% endfor %}
+        </div>
+        <div class="tab-pane show fade" id="learn" role="tabpanel"> {% for img_data in img %}
+            <img src="{{img_data['link']}}" title="uploaded on {{img_data['date']}}"
+                 class="the-image"/> {% endfor %}
+        </div>
+        <div class="tab-pane show fade" id="about" role="tabpanel">
+            ome
+        </div>
+    </div>
+</div>
+{% endblock %}

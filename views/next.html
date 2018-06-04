@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Upload Photo Profile {% endblock %}
+{% block head %} {{super()}}
+<script src="/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/js/net.js"></script> {% endblock %}
+{% block body %}
+<header class="header">
+    <div class="nav">
+        <div class="netral">
+            <a href="/log_out">
+                <button class="butt">Log Out</button>
+            </a>
+            <a href="/" class="brand">
+                <img src="/assets/media/oscop.png" width="100px" height="40px" />
+            </a>
+            <form>
+                <input class="input-main" type="text" autocomplete="off" placeholder="Search something ..">
+            </form>
+        </div>
+    </div>
+</header>
+<div class="form-login">
+    <h3 class="title">Upload your photo</h3>
+     {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashed">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <form class="form-data" action="/next/step/2" enctype="multipart/form-data" method="POST">
+        <div class="wrap-file">
+            <button class="wrap-btn">
+                <img src="#" width="140px" height="140px" id="dis" style="margin: -4px -7px;"/>
+            </button>
+            <input type="file" name="file" id="files">
+        </div>
+        <div class="right">
+            <button class="butt">Upload</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
