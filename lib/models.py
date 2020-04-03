@@ -103,15 +103,12 @@ class Tag(Mode):
 
     id = Column(Integer, primary_key=True)
     from_post = Column(String(60), nullable=False)
-<<<<<<< HEAD
     tag_it = Column(String(1000))
 
     def __init__(self, from_post, tag_it):
         self.from_post = from_post
         self.tag_it = tag_it
-=======
 
     def __init__(self, from_post):
         self.from_post = from_post
->>>>>>> c505dc81b8da6db9bccd4cf9c53fe5fe83068551
 
