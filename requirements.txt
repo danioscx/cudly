@@ -12,6 +12,6 @@ pycparser==2.18
 PyMySQL==0.8.1
 six==1.11.0
 SQLAlchemy==1.2.7
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 WTForms==2.1
 gunicorn==19.7.1
