@@ -4,11 +4,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, \
     flash, session, json, send_from_directory
 from lib.classes import LoginForm, RegisterForm, PostForm, CommentForm
 from werkzeug.utils import secure_filename
-<<<<<<< HEAD
 from lib.models import User, Image, Article, Comments, Tag
-=======
 from lib.models import User, Image, Article, Comments
->>>>>>> c505dc81b8da6db9bccd4cf9c53fe5fe83068551
 from crypto import bcrypt, allow_file, path_folder
 from lib import db_session, engine
 from datetime import datetime
@@ -196,7 +193,6 @@ def add_post():
         )
         db_session.add(article)
         db_session.commit()
-<<<<<<< HEAD
         if not request.form['tag']:
             tag = Tag(
                 html,
@@ -206,8 +202,6 @@ def add_post():
             db_session.commit()
         else:
             pass
-=======
->>>>>>> c505dc81b8da6db9bccd4cf9c53fe5fe83068551
         return redirect(url_for('views.index'))
     return "/x/231/ws/"
 
